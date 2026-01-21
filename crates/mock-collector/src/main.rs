@@ -1,8 +1,5 @@
 use axum::{
-    extract::rejection::JsonRejection,
-    http::StatusCode,
-    response::IntoResponse,
-    routing::post,
+    extract::rejection::JsonRejection, http::StatusCode, response::IntoResponse, routing::post,
     Router,
 };
 use gas_agent::AgentPayload;
@@ -30,12 +27,21 @@ async fn handle_agent_publish(
             info!("Network:        {:?}", submission.payload.network);
             info!("From Block:     {}", submission.payload.from_block);
             info!("Settlement:     {:?}", submission.payload.settlement);
-            info!("Price:          {} {:?}", submission.payload.price, submission.payload.unit);
+            info!(
+                "Price:          {} {:?}",
+                submission.payload.price, submission.payload.unit
+            );
             info!("Timestamp:      {}", submission.payload.timestamp);
             info!("Schema Version: {}", submission.payload.schema_version);
             info!("───────────────────────────────────────────────────────────────");
-            info!("Signature:         {}...", &submission.signature[..20.min(submission.signature.len())]);
-            info!("Network Signature: {}...", &submission.network_signature[..20.min(submission.network_signature.len())]);
+            info!(
+                "Signature:         {}...",
+                &submission.signature[..20.min(submission.signature.len())]
+            );
+            info!(
+                "Network Signature: {}...",
+                &submission.network_signature[..20.min(submission.network_signature.len())]
+            );
             info!("═══════════════════════════════════════════════════════════════");
             (StatusCode::OK, "OK".to_string())
         }
@@ -50,7 +56,10 @@ async fn handle_agent_publish(
                 warn!("Details: {}", err.body_text());
             }
             warn!("═══════════════════════════════════════════════════════════════");
-            (StatusCode::BAD_REQUEST, format!("Invalid payload: {}", rejection))
+            (
+                StatusCode::BAD_REQUEST,
+                format!("Invalid payload: {}", rejection),
+            )
         }
     }
 }
