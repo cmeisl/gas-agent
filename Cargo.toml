@@ -1,3 +1,9 @@
+[workspace]
+members = [
+    ".",
+    "crates/mock-collector"
+]
+
 [package]
 name = "gas-agent"
 version = "0.1.1"
