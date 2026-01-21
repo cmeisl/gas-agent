@@ -83,15 +83,12 @@ mod tests {
     use alloy::primitives::aliases::{U240, U48};
 
     use super::*;
-    use crate::logs::init_logs;
-
-    // This ensures metrics are initialized exactly once
+    // This ensures tracing is initialized exactly once for tests
     static INIT: Once = Once::new();
 
     fn setup() {
         INIT.call_once(|| {
-            // Initialize metrics for testing
-            init_logs();
+            let _ = tracing_subscriber::fmt().with_test_writer().try_init();
         });
     }
 

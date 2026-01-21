@@ -12,6 +12,7 @@ use serde::{Deserialize, Serialize};
 use std::{fmt, str::FromStr};
 use strum_macros::{Display, EnumString};
 
+#[allow(dead_code)] // Used by binary
 #[derive(Debug, Clone, EnumString, Display, Deserialize, Serialize)]
 #[strum(serialize_all = "snake_case")]
 #[serde(rename_all = "snake_case")]
@@ -25,6 +26,7 @@ pub enum ModelKind {
     PendingFloor,
 }
 
+#[allow(dead_code)] // Used by binary
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[serde(from = "String")]
