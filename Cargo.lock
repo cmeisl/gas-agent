@@ -2238,7 +2238,7 @@ name = "mock-collector"
 version = "0.1.0"
 dependencies = [
  "axum",
- "chrono",
+ "gas-agent",
  "serde",
  "serde_json",
  "tokio",

@@ -265,6 +265,7 @@ impl SystemNetworkKey {
         }
     }
 
+    #[allow(dead_code)] // Used by agent binary only
     pub fn to_block_time(&self) -> u64 {
         match self {
             SystemNetworkKey {

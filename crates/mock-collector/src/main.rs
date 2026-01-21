@@ -5,6 +5,7 @@ use axum::{
     routing::post,
     Router,
 };
+use gas_agent::AgentPayload;
 use serde::{Deserialize, Serialize};
 use std::net::SocketAddr;
 use tracing::{info, warn};
@@ -15,47 +16,6 @@ struct AgentSubmission {
     payload: AgentPayload,
     signature: String,
     network_signature: String,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-struct AgentPayload {
-    schema_version: String,
-    from_block: u64,
-    settlement: Settlement,
-    timestamp: chrono::DateTime<chrono::Utc>,
-    system: System,
-    network: Network,
-    unit: PriceUnit,
-    price: String,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-#[serde(rename_all = "lowercase")]
-enum System {
-    Ethereum,
-    Base,
-    Polygon,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-#[serde(rename_all = "lowercase")]
-enum Network {
-    Mainnet,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-#[serde(rename_all = "lowercase")]
-enum Settlement {
-    Immediate,
-    Fast,
-    Medium,
-    Slow,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-#[serde(rename_all = "lowercase")]
-enum PriceUnit {
-    Wei,
 }
 
 async fn handle_agent_publish(
